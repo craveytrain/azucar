@@ -16,10 +16,8 @@ module.exports = function(grunt) {
 			test: 'test/**/*.js'
 		},
 
-		cafemocha: {
-			test: {
-				src: 'test/**/*.js'
-			}
+		mocha_phantomjs: {
+			all: ['test/**/*.html']
 		},
 
 		watch: {
@@ -31,10 +29,10 @@ module.exports = function(grunt) {
 	})
 
 	grunt.loadNpmTasks('grunt-contrib-jshint')
-	grunt.loadNpmTasks('grunt-cafe-mocha')
+	grunt.loadNpmTasks('grunt-mocha-phantomjs')
 	grunt.loadNpmTasks('grunt-contrib-watch')
 
-	grunt.registerTask('test', ['cafemocha'])
+	grunt.registerTask('test', ['mocha_phantomjs'])
 	grunt.registerTask('build', ['jshint', 'test'])
 
 	// Default task(s).

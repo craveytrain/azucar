@@ -1,9 +1,15 @@
 'use strict';
 
-var assert = require('assert')
+describe('Element', function() {
+	var el
 
-describe('Test', function() {
-	it('should do something', function() {
-		assert.equal(1, 1)
+	beforeEach(function() {
+		el = document.createElement('p')
+	})
+
+	describe('events', function() {
+		it('should have on()', function() {
+			expect(el).to.respondTo('on')
+		})
 	})
 })
