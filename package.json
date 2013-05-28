@@ -1,0 +1,17 @@
+{
+  "name": "azucar",
+  "version": "0.0.0",
+  "description": "Azucar is syntactic sugar",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": "",
+  "author": "Mike Cravey",
+  "license": "BSD",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.5.4",
+    "grunt-cafe-mocha": "~0.1.4",
+    "grunt-contrib-watch": "~0.4.4"
+  }
+}
