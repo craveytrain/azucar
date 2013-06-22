@@ -51,7 +51,10 @@ define({
 	},
 
 	// Non-functional test suite(s) to run in each browser
-	suites: [ 'tests/src/events' ],
+	suites: [
+		'tests/src/events',
+		'tests/src/classes'
+	],
 
 	// Functional test suite(s) to run in each browser once non-functional tests are completed
 	functionalSuites: [ /* 'myPackage/tests/functional' */ ],
