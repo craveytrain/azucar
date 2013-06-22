@@ -13,11 +13,7 @@ module.exports = function(grunt) {
 			},
 
 			build: 'Gruntfile.js',
-			test: 'test/**/*.js'
-		},
-
-		mocha_phantomjs: {
-			all: ['test/**/*.html']
+			test: 'tests/**/*.js'
 		},
 
 		watch: {
@@ -25,14 +21,22 @@ module.exports = function(grunt) {
 				files: ['test/**/*.js'],
 				tasks: ['test']
 			}
+		},
+
+		intern: {
+			client: {
+				options: {
+					config: 'tests/intern'
+				}
+			}
 		}
 	})
 
 	grunt.loadNpmTasks('grunt-contrib-jshint')
-	grunt.loadNpmTasks('grunt-mocha-phantomjs')
 	grunt.loadNpmTasks('grunt-contrib-watch')
+	grunt.loadNpmTasks('intern')
 
-	grunt.registerTask('test', ['mocha_phantomjs'])
+	grunt.registerTask('test', ['intern:client'])
 	grunt.registerTask('build', ['jshint', 'test'])
 
 	// Default task(s).

@@ -1,12 +1,11 @@
 'use strict';
 
-// Events
-Element.prototype.on = Element.prototype.addEventListener;
+define([
+	'events'
+], function(events) {
+	var El = Element.prototype;
 
-Element.prototype.trigger = function (type, data) {
-	var event = document.createEvent('HTMLEvents');
-	event.initEvent(type, true, true);
-	event.data = data || {};
-	event.eventName = type;
-	this.dispatchEvent(event);
-};
+	Object.keys(events).forEach(function(methodName) {
+		events[methodName](El);
+	});
+});
