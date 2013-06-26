@@ -3,7 +3,7 @@
 define([
 	'intern!bdd',
 	'intern/chai!assert',
-	'../../src/events.js'
+	'src/events'
 ], function(
 	bdd,
 	assert,

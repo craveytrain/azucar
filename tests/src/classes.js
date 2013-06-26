@@ -3,7 +3,7 @@
 define([
 	'intern!bdd',
 	'intern/chai!assert',
-	'../../src/classes.js'
+	'src/classes'
 ], function(
 	bdd,
 	assert,
