@@ -1,11 +1,11 @@
-var $ = function (d) {
-	var $ = d.querySelectorAll.bind(d);
+var $ = function (doc, _ElemProto, domNode, _ArrayProto) {
+	var $ = doc.querySelectorAll.bind(doc);
 
 	// Setup single node sugar
-	Element.prototype.on = Element.prototype.addEventListener;
+	_ElemProto.on = _ElemProto.addEventListener;
 
-	Element.prototype.trigger = function (type, data) {
-		var event = document.createEvent('HTMLEvents');
+	_ElemProto.trigger = function (type, data) {
+		var event = doc.createEvent('HTMLEvents');
 		event.initEvent(type, true, true);
 		event.data = data || {};
 		event.eventName = type;
@@ -23,35 +23,41 @@ var $ = function (d) {
 	}
 
 	function addSugar(array) {
-		array.on = function(event, callback) {
-			this.forEach(function(item, index) {
-				item.on(event, callback);
-			});
-		};
+		if (typeof _ElemProto.on === 'function') {
+			array.on = function(event, callback) {
+				this.forEach(function(item, index) {
+					item.on(event, callback);
+				});
+			};
+		}
 
-		array.trigger = function(event, callback) {
-			this.forEach(function(item, index) {
-				item.trigger(event, callback);
-			});
-		};
+		if (typeof _ElemProto.trigger === 'function') {
+			array.trigger = function(event, callback) {
+				this.forEach(function(item, index) {
+					item.trigger(event, callback);
+				});
+			};
+		}
 
-		array.classList = {
-			add: function addClass(className) {
-				array.forEach(function(item, index) {
-					item.classList.add(className);
-				}, array);
-			},
-			remove: function removeClass(className) {
-				array.forEach(function(item, index) {
-					item.classList.remove(className);
-				}, array);
-			},
-			contains: function containsClass(className) {
-				return array.some(function(item, index) {
-					return item.classList.contains(className);
-				}, array);
-			}
-		};
+		if (typeof domNode.classList === 'object') {
+			array.classList = {
+				add: function addClass(className) {
+					array.forEach(function(item, index) {
+						item.classList.add(className);
+					}, array);
+				},
+				remove: function removeClass(className) {
+					array.forEach(function(item, index) {
+						item.classList.remove(className);
+					}, array);
+				},
+				contains: function containsClass(className) {
+					return array.some(function(item, index) {
+						return item.classList.contains(className);
+					}, array);
+				}
+			};
+		}
 
 		return array;
 	}
@@ -66,4 +72,4 @@ var $ = function (d) {
 			return createArray(collection, length);
 		}
 	};
-}(document);
+}(document, Element.prototype, document.createElement('p'), Array.prototype);
