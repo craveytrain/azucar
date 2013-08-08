@@ -1,6 +1,6 @@
 'use strict';
-
-var $ = function (doc, _ElemProto, domNode, _ArrayProto) {
+/*jshint unused: false */
+var $ = (function (doc, _ElemProto, domNode) {
 	var $ = doc.querySelectorAll.bind(doc);
 
 	// Setup single node sugar
@@ -27,7 +27,7 @@ var $ = function (doc, _ElemProto, domNode, _ArrayProto) {
 	function addSugar(array) {
 		if (typeof _ElemProto.on === 'function') {
 			array.on = function(event, callback) {
-				this.forEach(function(item, index) {
+				this.forEach(function(item) {
 					item.on(event, callback);
 				});
 			};
@@ -35,7 +35,7 @@ var $ = function (doc, _ElemProto, domNode, _ArrayProto) {
 
 		if (typeof _ElemProto.trigger === 'function') {
 			array.trigger = function(event, callback) {
-				this.forEach(function(item, index) {
+				this.forEach(function(item) {
 					item.trigger(event, callback);
 				});
 			};
@@ -44,17 +44,17 @@ var $ = function (doc, _ElemProto, domNode, _ArrayProto) {
 		if (typeof domNode.classList === 'object') {
 			array.classList = {
 				add: function addClass(className) {
-					array.forEach(function(item, index) {
+					array.forEach(function(item) {
 						item.classList.add(className);
 					}, array);
 				},
 				remove: function removeClass(className) {
-					array.forEach(function(item, index) {
+					array.forEach(function(item) {
 						item.classList.remove(className);
 					}, array);
 				},
 				contains: function containsClass(className) {
-					return array.some(function(item, index) {
+					return array.some(function(item) {
 						return item.classList.contains(className);
 					}, array);
 				}
@@ -74,4 +74,4 @@ var $ = function (doc, _ElemProto, domNode, _ArrayProto) {
 			return createArray(collection, length);
 		}
 	};
-}(document, Element.prototype, document.createElement('p'), Array.prototype);
+}(document, Element.prototype, document.createElement('p')));

@@ -1,3 +1,4 @@
+/*jshint maxstatements:99 */
 module.exports = function(grunt) {
 	'use strict';
 
@@ -13,19 +14,28 @@ module.exports = function(grunt) {
 			},
 
 			build: 'Gruntfile.js',
+			src: 'src/**/*.js',
 			test: 'tests/**/*.js'
 		},
 
 		watch: {
+			options: {
+				livereload: true
+			},
 			test: {
 				files: ['test/**/*.js'],
-				tasks: ['test']
+				tasks: ['jshint:test']
+			},
+			src: {
+				files: ['src/**/*.js'],
+				tasks: ['jshint:src']
 			}
 		},
 
 		intern: {
-			client: {
+			runner: {
 				options: {
+					runType: 'runner',
 					config: 'tests/intern'
 				}
 			}
@@ -33,19 +43,27 @@ module.exports = function(grunt) {
 
 		connect: {
 			server: {}
+		},
+
+		open: {
+			intern: {
+				path: 'http://localhost:8000/node_modules/intern/client.html?config=tests/intern&reporters=webdriver'
+			}
 		}
 	})
 
 	grunt.loadNpmTasks('grunt-contrib-jshint')
 	grunt.loadNpmTasks('grunt-contrib-watch')
 	grunt.loadNpmTasks('grunt-contrib-connect')
+	grunt.loadNpmTasks('grunt-open')
+	grunt.loadNpmTasks('grunt-notify')
 	grunt.loadNpmTasks('intern')
 
-	grunt.registerTask('test', ['intern:client'])
-	grunt.registerTask('build', ['jshint', 'test'])
-	grunt.registerTask('preview', ['connect', 'watch'])
+	grunt.registerTask('test', ['intern'])
+	grunt.registerTask('qc', ['jshint'])
+	grunt.registerTask('preview', ['qc', 'connect', 'open', 'watch'])
 
 	// Default task(s).
-	grunt.registerTask('default', ['build', 'watch'])
+	// grunt.registerTask('default', ['build', 'watch'])
 
 };
