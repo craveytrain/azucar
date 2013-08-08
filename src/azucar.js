@@ -1,3 +1,5 @@
+'use strict';
+
 var $ = function (doc, _ElemProto, domNode, _ArrayProto) {
 	var $ = doc.querySelectorAll.bind(doc);
 

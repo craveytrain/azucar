@@ -22,11 +22,11 @@ define({
 	// OnDemand. Options that will be permutated are browserName, version, platform, and platformVersion; any other
 	// capabilities options specified for an environment will be copied as-is
 	environments: [
-		{ browserName: 'internet explorer', version: '10', platform: 'Windows 2012' },
-		{ browserName: 'internet explorer', version: '9', platform: 'Windows 2008' },
-		{ browserName: 'firefox', version: '19', platform: [ 'Linux', 'Mac 10.6', 'Windows 2012' ] },
-		{ browserName: 'chrome', platform: [ 'Linux', 'Mac 10.8', 'Windows 2008' ] },
-		{ browserName: 'safari', version: '6', platform: 'Mac 10.8' }
+		// { browserName: 'internet explorer', version: '10', platform: 'Windows 2012' },
+		// { browserName: 'internet explorer', version: '9', platform: 'Windows 2008' },
+		// { browserName: 'firefox', version: '19', platform: [ 'Linux', 'Mac 10.6', 'Windows 2012' ] },
+		// { browserName: 'chrome', platform: [ 'Linux', 'Mac 10.8', 'Windows 2008' ] },
+		// { browserName: 'safari', version: '6', platform: 'Mac 10.8' }
 	],
 
 	// Maximum number of simultaneous integration tests that should be executed on the remote WebDriver service
@@ -52,14 +52,12 @@ define({
 
 	// Non-functional test suite(s) to run in each browser
 	suites: [
-		'tests/src/events',
-		'tests/src/classes',
-		'tests/src/lists'
+		'tests/src/element'
 	],
 
 	// Functional test suite(s) to run in each browser once non-functional tests are completed
 	functionalSuites: [
-		'tests/func/classes'
+		// 'tests/func/azucar'
 	],
 
 	// A regular expression matching URLs to files that should not be included in code coverage analysis
