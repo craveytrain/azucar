@@ -1,6 +1,25 @@
-'use strict';
-/*jshint unused: false */
-var $ = (function (doc, _ElemProto, domNode) {
+(function (root, factory) {
+	'use strict';
+
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define('azucar', [], function() {
+            // Also create a global in case some scripts
+            // that are loaded still are looking for
+            // a global even when an AMD loader is in use.
+
+            /* jshint boss:true */
+            return (root.$ = factory());
+        });
+    } else {
+        // Browser globals
+        root.$ = factory();
+    }
+}(this, function factory() {
+	'use strict';
+	var doc = document;
+	var _ElemProto = Element.prototype;
+	var domNode = doc.createElement('p');
 	var $ = doc.querySelectorAll.bind(doc);
 
 	// Setup single node sugar
@@ -74,4 +93,4 @@ var $ = (function (doc, _ElemProto, domNode) {
 			return createArray(collection, length);
 		}
 	};
-}(document, Element.prototype, document.createElement('p')));
+}));
